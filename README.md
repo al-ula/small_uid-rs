@@ -53,8 +53,6 @@ However, **sort order within the same millisecond is not guaranteed** because of
 ### Generating Small UIDs
 
 ```rust
-use small_uid::SmallUid;
-
 let smalluid1 = SmallUid::new().unwrap();
 let smalluid2 = SmallUid::try_from("GSntNvOw6n8".to_string()).unwrap();
 ```
@@ -62,8 +60,6 @@ let smalluid2 = SmallUid::try_from("GSntNvOw6n8".to_string()).unwrap();
 ### Converting Small UIDs
 
 ```rust
-use small_uid::SmallUid;
-
 let smalluid = SmallUid::new().unwrap();
 let uid_string = smalluid.to_string();
 ```

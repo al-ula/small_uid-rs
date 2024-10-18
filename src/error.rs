@@ -1,6 +1,7 @@
 use base64_url::base64::DecodeSliceError;
 use std::time::SystemTimeError;
 
+/// Errors that can occur when creating a SmallUid.
 #[derive(Debug)]
 pub enum SmallUidError {
     SystemTime(SystemTimeError),

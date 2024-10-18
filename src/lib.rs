@@ -1,3 +1,6 @@
+//!
+#![doc = include_str!("../README.md")]
+//!
 mod error;
 mod test;
 mod generation;
@@ -12,17 +15,24 @@ type Error = SmallUidError;
 pub struct SmallUid(pub u64);
 
 impl SmallUid {
+    /// Creates a new small unique identifier.
     pub fn new() -> Result<SmallUid, Error> {
         generation::gen()
     }
+
+    /// Creates a SmallUid from the provided timestamp and random number.
     pub fn from_parts(timestamp: u64, random: u64) -> Result<SmallUid, Error> {
         compose(timestamp, random)
     }
+
+    /// Creates a SmallUid from the provided timestamp.
     pub fn from_timestamp(timestamp: u64) -> Result<SmallUid, Error> {
         let timestamp = checking::timestamp_check(timestamp)?;
         let random = generation::random_gen()?;
         compose(timestamp, random)
     }
+
+    /// Creates a SmallUid from the provided random number.
     pub fn from_random(random: u64) -> Result<SmallUid, Error> {
         let random = checking::rng_size_check(random)?;
         let timestamp = generation::timestamp_gen()?;
@@ -70,6 +80,8 @@ impl Display for SmallUid {
     }
 }
 
+
+/// Composes a timestamp and a random number into a SmallUid.
 fn compose(timestamp: u64, random: u64) -> Result<SmallUid, Error> {
     let timestamp = checking::timestamp_check(timestamp)?;
     let random = checking::rng_size_check(random)?;
