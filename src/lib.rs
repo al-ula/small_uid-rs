@@ -3,7 +3,11 @@
 //!
 mod error;
 mod test;
+
+/// Generating timestamp and random number
 mod generation;
+
+/// Checking timestamp and random number
 mod checking;
 
 pub use error::SmallUidError;
