@@ -2,6 +2,8 @@
 #![doc = include_str!("../README.md")]
 //!
 mod error;
+
+#[cfg(test)]
 mod test;
 
 /// Generating timestamp and random number
