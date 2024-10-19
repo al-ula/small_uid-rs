@@ -16,7 +16,7 @@ Small UIDs are short unique identifiers especially designed to be used as effici
 
 - Half smaller than UUID / ULID (64-bit)
 - Lexicographically sortable
-- Encodable as a short user-friendly and URL-safe base-62 string (`a-zA-Z0-9`)
+- Encodable as a short user-friendly and URL-safe base-64 string (`a-zA-Z0-9_-`)
 - User-friendly strings are generated in a way to be always very different (no shared prefix due to similar timestamps)
 
 
