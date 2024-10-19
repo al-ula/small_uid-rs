@@ -2,7 +2,7 @@
 
 ⚠️ _This project is in experimental phase, the API may may be subject to change._
 
-This is a rust implementation of [Small UID](https://github.com/Mediagone/small-uid) by [Mediagone](https://github.com/Mediagone).
+This project is heavily inspired by [Small UID](https://github.com/Mediagone/small-uid) by [Mediagone](https://github.com/Mediagone) with the only difference is the string encoding for this one is base64-url instead of base62.
 
 UUIDs are frequently used as database _Primary Key_ in software development. However, they aren't the best choice mainly due to their random sorting and the resulting fragmentation in databases indexes.
 
