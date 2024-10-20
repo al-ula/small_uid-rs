@@ -8,6 +8,8 @@ UUIDs are frequently used as database _Primary Key_ in software development. How
 
 Using [ULIDs](https://github.com/ulid/spec) is generally a very good alternative, solving most of UUID flaws.
 
+Twitter's Snowflake is another option if you want to generate roughly sortable uid. But, Snowflake is not using random numbers instead it used machine id to generate the uid. It's a good choice if you integrate it into a distributed systems and doesn't really need randomness.
+
 **Small UIDs** are also an ideal alternative **when you do not need as much uniqueness** and want **shorter "user-friendly" encoded strings**.
 
 ## Introduction
@@ -53,13 +55,13 @@ However, **sort order within the same millisecond is not guaranteed** because of
 ### Generating Small UIDs
 
 ```rust
-let smalluid1 = SmallUid::new().unwrap();
+let smalluid1 = SmallUid::new();
 let smalluid2 = SmallUid::try_from("GSntNvOw6n8".to_string()).unwrap();
 ```
 
 ### Converting Small UIDs
 
 ```rust
-let smalluid = SmallUid::new().unwrap();
+let smalluid = SmallUid::new();
 let uid_string = smalluid.to_string();
 ```

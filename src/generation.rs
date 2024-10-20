@@ -7,13 +7,15 @@ pub fn timestamp_gen() -> Result<u64, Error> {
     let start = SystemTime::now();
     let since_the_epoch = start.duration_since(UNIX_EPOCH)?;
     let timestamp = since_the_epoch.as_millis() as u64;
-    crate::checking::timestamp_check(timestamp)
+    debug_assert!(crate::checking::timestamp_check(timestamp));
+    Ok(timestamp)
 }
 
 /// Generates a random number as u64
 pub fn random_gen() -> Result<u64, Error> {
     let random_20bit: u64 = rand::thread_rng().gen_range(0..(1 << 20));
-    crate::checking::rng_size_check(random_20bit)
+    debug_assert!(crate::checking::rng_size_check(random_20bit).is_ok());
+    Ok(random_20bit)
 }
 
 /// Generates SmallUid using timestamp_gen() and random_gen()

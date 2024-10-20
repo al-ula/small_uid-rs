@@ -10,7 +10,7 @@ mod test;
 mod generation;
 
 /// Checking timestamp and random number
-mod checking;
+pub mod checking;
 
 pub use error::SmallUidError;
 use serde::{Deserialize, Serialize};
@@ -22,27 +22,25 @@ pub struct SmallUid(pub u64);
 
 impl SmallUid {
     /// Creates a new small unique identifier.
-    pub fn new() -> Result<SmallUid, Error> {
-        generation::gen()
+    pub fn new() -> SmallUid {
+        generation::gen().unwrap()
     }
 
     /// Creates a SmallUid from the provided timestamp and random number.
-    pub fn from_parts(timestamp: u64, random: u64) -> Result<SmallUid, Error> {
-        compose(timestamp, random)
+    pub fn from_parts(timestamp: u64, random: u64) -> SmallUid {
+        SmallUid((timestamp << 20) | random)
     }
 
     /// Creates a SmallUid from the provided timestamp.
-    pub fn from_timestamp(timestamp: u64) -> Result<SmallUid, Error> {
-        let timestamp = checking::timestamp_check(timestamp)?;
-        let random = generation::random_gen()?;
-        compose(timestamp, random)
+    pub fn from_timestamp(timestamp: u64) -> SmallUid {
+        let random = generation::random_gen().unwrap();
+        Self::from_parts(timestamp, random)
     }
 
     /// Creates a SmallUid from the provided random number.
-    pub fn from_random(random: u64) -> Result<SmallUid, Error> {
-        let random = checking::rng_size_check(random)?;
-        let timestamp = generation::timestamp_gen()?;
-        compose(timestamp, random)
+    pub fn from_random(random: u64) -> SmallUid {
+        let timestamp = generation::timestamp_gen().unwrap();
+        Self::from_parts(timestamp, random)
     }
 }
 
@@ -84,12 +82,4 @@ impl Display for SmallUid {
         let smalluid = base64_url::encode(&self.0.to_be_bytes());
         write!(f, "{}", smalluid)
     }
-}
-
-
-/// Composes a timestamp and a random number into a SmallUid.
-fn compose(timestamp: u64, random: u64) -> Result<SmallUid, Error> {
-    let timestamp = checking::timestamp_check(timestamp)?;
-    let random = checking::rng_size_check(random)?;
-    Ok(SmallUid((timestamp << 20) | random))
 }
