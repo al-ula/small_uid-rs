@@ -7,7 +7,7 @@ pub fn timestamp_gen() -> Result<u64, Error> {
     let start = SystemTime::now();
     let since_the_epoch = start.duration_since(UNIX_EPOCH)?;
     let timestamp = since_the_epoch.as_millis() as u64;
-    debug_assert!(crate::checking::timestamp_check(timestamp));
+    debug_assert!(crate::checking::timestamp_check(timestamp).is_ok());
     Ok(timestamp)
 }
 
