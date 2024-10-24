@@ -42,11 +42,29 @@ impl SmallUid {
         let timestamp = generation::timestamp_gen().unwrap();
         Self::from_parts(timestamp, random)
     }
+
+    pub fn get_timestamp(&self) -> u64 {
+        self.0 >> 20
+    }
+
+    pub fn get_random(&self) -> u64 {
+        self.0 & 0xFFFFF
+    }
+
+    pub fn to_u64(&self) -> u64 {
+        self.0
+    }
 }
 
 impl From<u64> for SmallUid {
     fn from(value: u64) -> Self {
         SmallUid(value)
+    }
+}
+
+impl From<SmallUid> for u64 {
+    fn from(value: SmallUid) -> Self {
+        value.0
     }
 }
 
@@ -68,12 +86,6 @@ impl TryFrom<String> for SmallUid {
 impl From<SmallUid> for String {
     fn from(value: SmallUid) -> Self {
         value.to_string()
-    }
-}
-
-impl From<SmallUid> for u64 {
-    fn from(value: SmallUid) -> Self {
-        value.0
     }
 }
 

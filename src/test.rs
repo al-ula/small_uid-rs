@@ -59,3 +59,20 @@ fn test_display() {
     let string2 = format!("{}", smalluid);
     assert_eq!(string1, string2);
 }
+
+#[test]
+fn from_u64() {
+    let smalluid = SmallUid::new();
+    let u64: u64 = smalluid.into();
+    let smalluid2: SmallUid = u64.into();
+    assert_eq!(smalluid, smalluid2);
+}
+
+#[test]
+fn test_get(){
+    let smalluid = SmallUid::new();
+    let timestamp = smalluid.get_timestamp();
+    let random = smalluid.get_random();
+    let smalluid2 = SmallUid::from_parts(timestamp, random);
+    assert_eq!(smalluid, smalluid2);
+}
