@@ -13,11 +13,15 @@ mod generation;
 pub mod checking;
 
 pub use error::SmallUidError;
+
+#[cfg(not(target_arch = "wasm32"))]
 use serde::{Deserialize, Serialize};
+
 use std::fmt::Display;
 type Error = SmallUidError;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(not(target_arch = "wasm32"), derive(Serialize, Deserialize))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct SmallUid(pub u64);
 
 impl SmallUid {
