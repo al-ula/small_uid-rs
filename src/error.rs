@@ -10,6 +10,7 @@ pub enum SmallUidError {
     NotABase64Url,
     DecodeSlice(DecodeSliceError),
     VecToArray,
+    InvalidChar,
 }
 
 impl From<SystemTimeError> for SmallUidError {
@@ -39,6 +40,7 @@ impl std::fmt::Display for SmallUidError {
             SmallUidError::NotABase64Url => f.write_str("NotABase64Url: Not a base64url string"),
             SmallUidError::DecodeSlice(err) => err.fmt(f),
             SmallUidError::VecToArray => f.write_str("VecToArray: Failed to convert"),
+            SmallUidError::InvalidChar => f.write_str("InvalidChar: Invalid character"),
         }
     }
 }
