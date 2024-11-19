@@ -1,14 +1,6 @@
 # Small UID
 
-[![Crates.io License (version)](https://img.shields.io/crates/l/small_uid/0.2.2)](https://crates.io/crates/small_uid)
-[![Crates.io Total Downloads](https://img.shields.io/crates/d/small_uid)](https://crates.io/crates/small_uid)
-
-⚠️ _This project is in experimental phase, the API may may be subject to
-change._
-
-This is a Rust implementation of [Small UIDs](https://github.com/al-ula/small_uid-rs),
-generating **unique identifiers** with **short strings** and lexicographically
-**sortable**. Check that repository for implementation in other languages.
+# <span style="color:red;"> Moved to [small_uid](https://github.com/al-ula/small_uid)</span>
 
 UUIDs are frequently used as database _Primary Key_ in software development.
 However, they aren't the best choice mainly due to their random sorting and the
